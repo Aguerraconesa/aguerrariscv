@@ -31,14 +31,21 @@ begin
             when "0010" =>  -- SLL
                 res_int <= std_logic_vector(shift_left(unsigned(operand_a_i), shamt));
 
-            when "0100" =>  -- SLT (con signo)
+            when "0011" =>  -- BEQ 
+            if operand_a_i = operand_b_i then
+                res_int <= (0 => '1', others => '0'); -- Son iguales, el salto se toma (1)
+            else
+                res_int <= (others => '0');           -- No son iguales (0)
+            end if;
+
+            when "0100" =>  -- SLT (signed)
                 if signed(operand_a_i) < signed(operand_b_i) then
                     res_int <= (0 => '1', others => '0');
                 else
                     res_int <= (others => '0');
                 end if;
 
-            when "0110" =>  -- SLTU (sin signo)
+            when "0110" =>  -- SLTU (unsigned)
                 if unsigned(operand_a_i) < unsigned(operand_b_i) then
                     res_int <= (0 => '1', others => '0');
                 else

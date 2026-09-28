@@ -111,17 +111,17 @@ begin
                         when "101" => -- SRLI
                             alu_op_o <= "1010";
                         when others =>
-                            alu_op_o <= "0000"; -- Default to ADDI for unknown funct3
+                            null; -- !!!! Default to NULL for unknown funct7 in this way we dont override the previous ALU operation set by funct3
                     end case;
                 when "0100000" =>
                     case funct3_i is
                         when "101" => -- SRAI
                             alu_op_o <= "1011";
                         when others =>
-                            alu_op_o <= "0000"; -- Default to ADDI for unknown funct3
+                            null; -- !!!! Default to NULL for unknown funct7 in this way we dont override the previous ALU operation set by funct3
                     end case;
                 when others =>
-                    alu_op_o <= "0000"; -- Default to ADDI for unknown funct7
+                    null; -- !!!! Default to NULL for unknown funct7 in this way we dont override the previous ALU operation set by funct3
             end case;
 
         when "0000011" => -- Load
@@ -197,6 +197,15 @@ begin
                 when others =>
                     alu_op_o <= "0000"; -- Default to ADD for unknown funct3
             end case;
+            when others =>
+                alu_op_o <= "0000"; -- Default to ADD for unknown opcode
+                we_regfile_o <= '0';
+                we_mem_o <= '0';
+                alu_src_o <= '0';
+                alu2reg_o <= '0';
+                imm_rd_o <= '0';
+                br_neg_o <= '0';
+                branch_o <= '0';
         end case;
     end process;
 end architecture;

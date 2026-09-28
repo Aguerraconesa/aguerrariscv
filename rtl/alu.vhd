@@ -7,8 +7,7 @@ entity alu is
         operand_a_i : in std_logic_vector(31 downto 0);
         operand_b_i : in std_logic_vector(31 downto 0);
         result_o : out std_logic_vector(31 downto 0);
-        opcode_i : in std_logic_vector(3 downto 0);
-        zero_o : out std_logic
+        opcode_i : in std_logic_vector(3 downto 0)
     );
 end alu;
 
@@ -74,6 +73,5 @@ begin
         end process;
 
     result_o <= res_int;
-    zero_o <= '1' when res_int = (res_int'range => '0') else '0';
         
 end rtl;

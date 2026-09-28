@@ -2,14 +2,14 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity sign_extent_b is
+entity sign_and_order is
     port (
         instr_i : in  std_logic_vector(31 downto 0);
         imm_o   : out std_logic_vector(31 downto 0)
     );
 end entity;
 
-architecture rtl of sign_extent_b is
+architecture rtl of sign_and_order is
     signal imm_b : std_logic_vector(12 downto 0);
 begin
     -- Reassemble B-type immediate from scattered instruction bits:
